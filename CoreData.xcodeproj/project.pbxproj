@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0CA46F3A1D1722DB00F584F6 /* SPXCoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CA46F2F1D1722DB00F584F6 /* SPXCoreData.framework */; };
+		0C831D191DF449320074EC3E /* AAIFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C831D181DF449320074EC3E /* AAIFoundation.framework */; };
+		0CA46F3A1D1722DB00F584F6 /* AAICoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CA46F2F1D1722DB00F584F6 /* AAICoreData.framework */; };
 		0CA46F3F1D1722DB00F584F6 /* CoreDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA46F3E1D1722DB00F584F6 /* CoreDataTests.swift */; };
-		0CE0A4571D1726F000F83C68 /* SPXFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CE0A4561D1726F000F83C68 /* SPXFoundation.framework */; };
 		0CE0A4601D172BBD00F83C68 /* NSManagedObjectContext+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE0A45F1D172BBD00F83C68 /* NSManagedObjectContext+Extensions.swift */; };
 		0CE0A4611D17318200F83C68 /* NSManageObjectModel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE0A45D1D172BA200F83C68 /* NSManageObjectModel+Extensions.swift */; };
 		0CE0A4631D17337D00F83C68 /* NSPersistentStoreCoordinator+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE0A4621D17337D00F83C68 /* NSPersistentStoreCoordinator+Extensions.swift */; };
@@ -65,7 +65,8 @@
 		0C0700791DE0D6BC00BB4053 /* iOSlib-Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "iOSlib-Release.xcconfig"; sourceTree = "<group>"; };
 		0C07007A1DE0D6BC00BB4053 /* iOSlib.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = iOSlib.xcconfig; sourceTree = "<group>"; };
 		0C07007B1DE0D6BC00BB4053 /* Specific.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Specific.xcconfig; sourceTree = "<group>"; };
-		0CA46F2F1D1722DB00F584F6 /* SPXCoreData.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SPXCoreData.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0C831D181DF449320074EC3E /* AAIFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AAIFoundation.framework; path = "../../../DerivedData/Medical-Records/Build/Products/Debug-iphonesimulator/AAIFoundation.framework"; sourceTree = "<group>"; };
+		0CA46F2F1D1722DB00F584F6 /* AAICoreData.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AAICoreData.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0CA46F391D1722DB00F584F6 /* CoreDataTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoreDataTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0CA46F3E1D1722DB00F584F6 /* CoreDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataTests.swift; sourceTree = "<group>"; };
 		0CA46F401D1722DB00F584F6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -131,7 +132,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0CE0A4571D1726F000F83C68 /* SPXFoundation.framework in Frameworks */,
+				0C831D191DF449320074EC3E /* AAIFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -139,7 +140,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0CA46F3A1D1722DB00F584F6 /* SPXCoreData.framework in Frameworks */,
+				0CA46F3A1D1722DB00F584F6 /* AAICoreData.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -388,7 +389,7 @@
 		0CA46F301D1722DB00F584F6 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				0CA46F2F1D1722DB00F584F6 /* SPXCoreData.framework */,
+				0CA46F2F1D1722DB00F584F6 /* AAICoreData.framework */,
 				0CA46F391D1722DB00F584F6 /* CoreDataTests.xctest */,
 			);
 			name = Products;
@@ -589,6 +590,7 @@
 		0CE0A4551D1726F000F83C68 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0C831D181DF449320074EC3E /* AAIFoundation.framework */,
 				0CE0A4561D1726F000F83C68 /* SPXFoundation.framework */,
 			);
 			name = Frameworks;
@@ -643,7 +645,7 @@
 			);
 			name = CoreData;
 			productName = CoreData;
-			productReference = 0CA46F2F1D1722DB00F584F6 /* SPXCoreData.framework */;
+			productReference = 0CA46F2F1D1722DB00F584F6 /* AAICoreData.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		0CA46F381D1722DB00F584F6 /* CoreDataTests */ = {

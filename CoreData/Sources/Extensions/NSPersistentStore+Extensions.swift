@@ -17,7 +17,7 @@
 import Foundation
 import CoreData
 
-import SPXFoundation
+import AAIFoundation
 
 private let unfair = OSUnfairLock()
 
