@@ -10,12 +10,12 @@
 		0C831D191DF449320074EC3E /* AAIFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C831D181DF449320074EC3E /* AAIFoundation.framework */; };
 		0CA46F3A1D1722DB00F584F6 /* AAICoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CA46F2F1D1722DB00F584F6 /* AAICoreData.framework */; };
 		0CA46F3F1D1722DB00F584F6 /* CoreDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA46F3E1D1722DB00F584F6 /* CoreDataTests.swift */; };
+		0CA939861E8AFE740092CA46 /* CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA939851E8AFE740092CA46 /* CoreData.swift */; };
 		0CE0A4601D172BBD00F83C68 /* NSManagedObjectContext+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE0A45F1D172BBD00F83C68 /* NSManagedObjectContext+Extensions.swift */; };
 		0CE0A4611D17318200F83C68 /* NSManageObjectModel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE0A45D1D172BA200F83C68 /* NSManageObjectModel+Extensions.swift */; };
 		0CE0A4631D17337D00F83C68 /* NSPersistentStoreCoordinator+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE0A4621D17337D00F83C68 /* NSPersistentStoreCoordinator+Extensions.swift */; };
 		0CE0A4651D17341700F83C68 /* NSPersistentStore+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE0A4641D17341700F83C68 /* NSPersistentStore+Extensions.swift */; };
 		0CF8DC801D1FF9B90068A152 /* NSManagedObject+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF8DC7F1D1FF9B90068A152 /* NSManagedObject+Extensions.swift */; };
-		E138916BC3CB4913272654E8 /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = E13894AB667E5D38AD3C4437 /* Version.swift */; };
 		E13896E8A36979600ED19613 /* Version.c in Sources */ = {isa = PBXBuildFile; fileRef = E138906A2CF36FE62269C613 /* Version.c */; };
 /* End PBXBuildFile section */
 
@@ -114,6 +114,7 @@
 		0CA46F851D17235800F584F6 /* Template.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Template.xcconfig; sourceTree = "<group>"; };
 		0CA470291D17243A00F584F6 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0CA4702A1D17243A00F584F6 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		0CA939851E8AFE740092CA46 /* CoreData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreData.swift; sourceTree = "<group>"; };
 		0CE0A4561D1726F000F83C68 /* SPXFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SPXFoundation.framework; path = "../DerivedData/Frameworks/Build/Products/Debug-iphonesimulator/SPXFoundation.framework"; sourceTree = "<group>"; };
 		0CE0A45D1D172BA200F83C68 /* NSManageObjectModel+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSManageObjectModel+Extensions.swift"; sourceTree = "<group>"; };
 		0CE0A45F1D172BBD00F83C68 /* NSManagedObjectContext+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectContext+Extensions.swift"; sourceTree = "<group>"; };
@@ -121,7 +122,6 @@
 		0CE0A4641D17341700F83C68 /* NSPersistentStore+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSPersistentStore+Extensions.swift"; sourceTree = "<group>"; };
 		0CF8DC7F1D1FF9B90068A152 /* NSManagedObject+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSManagedObject+Extensions.swift"; sourceTree = "<group>"; };
 		E138906A2CF36FE62269C613 /* Version.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Version.c; sourceTree = "<group>"; };
-		E13894AB667E5D38AD3C4437 /* Version.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Version.swift; sourceTree = "<group>"; };
 		E13895A3CEE5CA508A9A8E5C /* CoreData-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CoreData-Bridging-Header.h"; sourceTree = "<group>"; };
 		E138964FB59CA0D071FB12BC /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		E1389F13A8931EE8CC6D7DDB /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -571,6 +571,7 @@
 		0CA470121D17243A00F584F6 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				0CA939851E8AFE740092CA46 /* CoreData.swift */,
 				0CE0A4581D172B5D00F83C68 /* Extensions */,
 				E1389CC04B3F507EBD952B14 /* Version */,
 			);
@@ -612,7 +613,6 @@
 			isa = PBXGroup;
 			children = (
 				E138906A2CF36FE62269C613 /* Version.c */,
-				E13894AB667E5D38AD3C4437 /* Version.swift */,
 			);
 			path = Version;
 			sourceTree = "<group>";
@@ -735,9 +735,9 @@
 				0CE0A4601D172BBD00F83C68 /* NSManagedObjectContext+Extensions.swift in Sources */,
 				0CE0A4651D17341700F83C68 /* NSPersistentStore+Extensions.swift in Sources */,
 				0CE0A4611D17318200F83C68 /* NSManageObjectModel+Extensions.swift in Sources */,
+				0CA939861E8AFE740092CA46 /* CoreData.swift in Sources */,
 				0CF8DC801D1FF9B90068A152 /* NSManagedObject+Extensions.swift in Sources */,
 				E13896E8A36979600ED19613 /* Version.c in Sources */,
-				E138916BC3CB4913272654E8 /* Version.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

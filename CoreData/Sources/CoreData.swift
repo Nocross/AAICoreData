@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2016 Andrey Ilskiy.
+    Copyright (c) 2017 Andrey Ilskiy.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -14,14 +14,20 @@
     limitations under the License.
  */
 
-public final class Version {
+public final class CoreData {
     private init() {}
+}
 
-    public static var number: Double {
-        return getFoundationVersionNumber()
-    }
+public extension CoreData {
+    public final class Version {
+        private init() {}
 
-    public static var string: String {
-        return String(cString: getFoundationVersionString())
+        public static var number: Double {
+            return getFoundationVersionNumber()
+        }
+
+        public static var string: String {
+            return String(cString: getFoundationVersionString())
+        }
     }
 }
