@@ -65,7 +65,8 @@ public extension NSPersistentStore {
         return result
     }
 
-    public static func setDefaultOptions(_ options: StoreOptions, forStoreType type: String) {
+    @objc
+    public class func setDefaultOptions(_ options: StoreOptions, forStoreType type: String) {
 
         unfair.lock()
 
