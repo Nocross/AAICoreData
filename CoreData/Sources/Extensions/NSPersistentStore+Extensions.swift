@@ -21,14 +21,14 @@ import AAIFoundation
 
 private let unfair = OSUnfairLock()
 
-public extension NSPersistentStore {
+extension NSPersistentStore {
     public typealias StoreType = String
     public typealias StoreOptions = [AnyHashable : Any]
     public typealias StoreTypeOptionsMap = [StoreType : StoreOptions]
 
-    fileprivate final class var key: UnsafePointer<Selector> {
-        var selector = #selector(setDefaultOptions)
-        return withUnsafePointer(to: &selector) { return $0 }
+    fileprivate final class var key: UnsafeRawPointer {
+        let selector = #selector(setDefaultOptions)
+        return unsafeBitCast(selector, to: UnsafeRawPointer.self)
     }
 
     public static func defaultOptions() -> StoreTypeOptionsMap? {
@@ -54,8 +54,8 @@ public extension NSPersistentStore {
             result = map[type]
         } else if type == NSSQLiteStoreType {
             result = [
-                NSMigratePersistentStoresAutomaticallyOption : NSNumber(value: true),
-                NSInferMappingModelAutomaticallyOption : NSNumber(value: true),
+                NSMigratePersistentStoresAutomaticallyOption : true,
+                NSInferMappingModelAutomaticallyOption : true,
                 NSPersistentStoreFileProtectionKey : FileProtectionType.complete.rawValue
             ]
         }
