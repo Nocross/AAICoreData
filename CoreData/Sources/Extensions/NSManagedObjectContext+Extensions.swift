@@ -16,7 +16,74 @@
 
 import CoreData
 
-public extension NSManagedObjectContext {
+extension NSManagedObjectContext {
+    
+    @available(iOS 10.0, *)
+    public convenience init(parent: NSManagedObjectContext, concurrencyType ct: NSManagedObjectContextConcurrencyType? = nil) {
+        let concurrencyType = ct ?? parent.concurrencyType
+        self.init(concurrencyType: concurrencyType)
+        self.parent = parent
+        self.automaticallyMergesChangesFromParent = true
+    }
+    
+    @available(iOS 5.0, *)
+    public convenience init(fromCoordinatorOf context: NSManagedObjectContext, concurrencyType ct: NSManagedObjectContextConcurrencyType? = nil) {
+        let concurrencyType = ct ?? context.concurrencyType
+        self.init(concurrencyType: concurrencyType)
+        
+        var root: NSManagedObjectContext? = context
+        repeat {
+            if let coordinator = root?.persistentStoreCoordinator {
+                self.persistentStoreCoordinator = coordinator
+                root = nil
+            } else {
+                root = root?.parent
+            }
+        } while root != nil
+        
+        precondition(self.persistentStoreCoordinator != nil)
+    }
+    
+    //MARK: -
+    
+    open func insert<S>(_ objects: S) where S : Sequence, S.Element : NSManagedObject {
+        //TODO: Add bunch of check(s) to prevent potential exception raisal
+        objects.forEach { self.insert($0) }
+    }
+    
+    open func delete<S>(_ objects: S) where S : Sequence, S.Element : NSManagedObject {
+        //TODO: Add bunch of check(s) to prevent potential exception raisal
+        objects.forEach { self.delete($0) }
+    }
+    
+    //MARK: -
+    
+    open func object<ManagedType>(for objectID: NSManagedObjectID) -> ManagedType where ManagedType : NSManagedObject {
+        
+        guard let object = object(with: objectID) as? ManagedType else {
+            let type = Swift.type(of: self.object(with: objectID))
+            let typeName = String(describing: type)
+            let entityTypeName = String(describing: objectID.entity.managedObjectClassName)
+            let message = "Type mismatch objectID type - \(entityTypeName) | object - \(typeName)"
+            preconditionFailure(message)
+        }
+        
+        return object
+    }
+    
+    @available(iOS 3.0, *)
+    public func existingObject<ManagedType>(for objectID: NSManagedObjectID) throws -> ManagedType where ManagedType : NSManagedObject {
+        
+        guard let object = try existingObject(with: objectID) as? ManagedType else {
+            let type = Swift.type(of: self.object(with: objectID))
+            let typeName = String(describing: type)
+            let entityTypeName = String(describing: objectID.entity.managedObjectClassName)
+            let message = "Type mismatch objectID type - \(entityTypeName) | object - \(typeName)"
+            preconditionFailure(message)
+        }
+        
+        return object
+    }
 
     //MARK: - Root
 
@@ -52,12 +119,12 @@ public extension NSManagedObjectContext {
             preconditionFailure("Multiple Root objects")
         }
 
-
         return result!
     }
 
     //MARK: - Save
 
+    @available(iOS 5.0, *)
     public func recursiveSave() throws {
         guard self.hasChanges && self.persistentStoreCoordinator != nil else {
             return
@@ -81,6 +148,9 @@ public extension NSManagedObjectContext {
 
         case .mainQueueConcurrencyType:
             self.perform(block)
+        @unknown default:
+            let typeName = String(describing: NSManagedObjectContextConcurrencyType.self)
+            preconditionFailure("Uknown value for \(typeName) - \(self.concurrencyType)")
         }
 
         if let error = saveError {
@@ -92,6 +162,7 @@ public extension NSManagedObjectContext {
 
     //MARK: - Private
 
+    @available(iOS 5.0, *)
     fileprivate func concurrencyGuard() {
         let isMainThread = Thread.isMainThread
         let concurrencyType = self.concurrencyType

@@ -25,16 +25,23 @@ extension NSManagedObjectModel {
     open func fetchRequestTemplate(for name: FetchRequest.Template.Name) -> NSFetchRequest<NSFetchRequestResult>? {
         return fetchRequestTemplate(forName: name.rawValue)
     }
-
-    open func fetchRequestFromTemplate<VariableType>(with name: FetchRequest.Template.Name, substituting variables: [VariableType]) -> NSFetchRequest<NSFetchRequestResult>? where VariableType : FetchRequest.Template.Variable {
-
+    
+    open func fetchRequestFromTemplate<ResultType, VariableType>(with name: FetchRequest.Template.Name, substituting variables: [VariableType]) -> NSFetchRequest<ResultType> where ResultType : NSFetchRequestResult, VariableType : FetchRequest.Template.Variable {
+        
+        let isSane = fetchRequestTemplatesByName.contains { $0.key == name.rawValue }
+        assert(isSane, "Missing request template for name - \(name)")
+        
         var reduced = [String : Any]()
         reduced = variables.reduce(into: reduced) { (result, variable) in
             let key = String(variable.name.rawValue)
             result[key] = variable.value
         }
         
-        let result = fetchRequestFromTemplate(withName: name.rawValue, substitutionVariables: reduced)
+        let request = fetchRequestFromTemplate(withName: name.rawValue, substitutionVariables: reduced)
+        guard let result = request?.copy() as? NSFetchRequest<ResultType> else {
+            preconditionFailure("Invalid request template for name - \(name)")
+        }
+        
         return result
     }
 }
@@ -67,3 +74,5 @@ extension NSManagedObjectModel.FetchRequest.Template {
         public let rawValue: RawValue
     }
 }
+
+extension NSManagedObject: ExpressionPredicateVariableValueProtocol {}

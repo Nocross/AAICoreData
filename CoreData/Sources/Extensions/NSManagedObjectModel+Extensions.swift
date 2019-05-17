@@ -17,16 +17,16 @@
 import Foundation
 import CoreData
 
-public extension NSManagedObjectModel {
-    public final class var fileExtension: String  {
+extension NSManagedObjectModel {
+    public static var fileExtension: String  {
         return "momd"
     }
 
-    public final class var defaultConfigurationName: String {
+    public static var defaultConfigurationName: String {
         return "Default"
     }
 
-    convenience init?(withName name: String, inBundle bundle: Bundle = Bundle.main) {
+    public convenience init?(withName name: String, inBundle bundle: Bundle = Bundle.main) {
         guard let url = bundle.url(forResource: name, withExtension: NSManagedObjectModel.fileExtension) else {
             return nil
         }
@@ -81,12 +81,20 @@ public extension NSManagedObjectModel {
 
         if result == nil {
             guard let entities = self.entities(forConfigurationName: configuration) else {
-                preconditionFailure("Missing configuration name - \(configuration)")
+                preconditionFailure("Missing configuration name - \(String(describing: configuration))")
             }
 
             result = entities.first(where: { $0.managedObjectClassName == name })
         }
 
+        return result
+    }
+    
+    public func hasKind<ManagedType>(of type: ManagedType.Type, for objectID: NSManagedObjectID, in configuration: Configuration? = nil) -> Bool where ManagedType : NSManagedObject {
+        
+        let entity = self.entity(for: type, in: configuration)
+        let result = entity != nil && entity!.isKindOf(entity: objectID.entity)
+        
         return result
     }
 }

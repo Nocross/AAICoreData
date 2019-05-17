@@ -16,12 +16,12 @@
 
 import CoreData
 
-public extension NSManagedObject {
-    convenience init(withProperties properties: [String : AnyObject], context moc: NSManagedObjectContext) {
+extension NSManagedObject {
+    public convenience init(withProperties properties: [String : Any], context moc: NSManagedObjectContext) {
         if #available(iOS 10.0, *) {
             self.init(context: moc)
         } else {
-            guard let entity = moc.persistentStoreCoordinator?.managedObjectModel.entity(ForClass: type(of: self)) else {
+            guard let entity = moc.persistentStoreCoordinator?.managedObjectModel.entity(for: type(of: self)) else {
                 preconditionFailure("Missing entity")
             }
 
@@ -29,5 +29,63 @@ public extension NSManagedObject {
         }
 
         self.setValuesForKeys(properties)
+    }
+    
+    public func withValueAcces(for property: NSPropertyDescription, access: () throws -> Void) rethrows -> Void {
+        let entity = self.entity
+        let hasProperty = entity.properties.contains { $0 == property }
+        guard hasProperty else {
+            preconditionFailure("Missing property - \(property) in \(entity) ")
+        }
+        
+        willAccessValue(for: property)
+        defer { didAccessValue(for: property) }
+        
+        try access()
+    }
+    
+    public func withValueAcces(forProperty name: NSPropertyDescription.Name, access: () throws -> Void) rethrows -> Void {
+        let entity = self.entity
+        let hasProperty = entity.propertiesByNameValue.contains { $0.key == name }
+        
+        guard hasProperty else {
+            preconditionFailure("Missing property for name - \(name) in \(entity) ")
+        }
+        
+        willAccessValue(forProperty: name)
+        defer { didAccessValue(forProperty: name) }
+        
+        try access()
+    }
+    
+    
+    private func withValueAcces(for key: String, access: () throws -> Void) rethrows -> Void {
+        
+        let entity = self.entity
+        let hasProperty = entity.propertiesByName.contains { $0.key == key }
+        guard hasProperty else {
+            preconditionFailure("Missing property for key - \(key) in \(entity) ")
+        }
+        
+        willAccessValue(forKey: key)
+        defer { didAccessValue(forKey: key) }
+        
+        try access()
+    }
+    
+    public func willAccessValue(for property: NSPropertyDescription?) {
+        self.willAccessValue(forProperty: property?.nameValue)
+    }
+    
+    public func didAccessValue(for property: NSPropertyDescription?) {
+        self.didAccessValue(forProperty: property?.nameValue)
+    }
+    
+    public func willAccessValue(forProperty name: NSPropertyDescription.Name?) {
+        self.willAccessValue(forKey: name?.rawValue)
+    }
+    
+    public func didAccessValue(forProperty name: NSPropertyDescription.Name?) {
+        self.didAccessValue(forKey: name?.rawValue)
     }
 }
