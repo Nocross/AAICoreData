@@ -22,12 +22,20 @@ extension NSManagedObjectModel {
         public let name: Name
     }
     
-    open func entities(forConfigurationName configuration: Configuration) -> [NSEntityDescription]? {
-        return entities(forConfigurationName: configuration.name.rawValue)
+    open func entities(for configuration: Configuration? = nil) -> [NSEntityDescription]? {
+        return entities(forConfigurationName: configuration?.name)
     }
     
-    open func setEntities(_ entities: [NSEntityDescription], forConfigurationName configuration: Configuration) {
-        setEntities(entities, forConfigurationName: configuration.name.rawValue)
+    open func setEntities(_ entities: [NSEntityDescription], for configuration: Configuration) {
+        setEntities(entities, forConfigurationName: configuration.name)
+    }
+    
+    private func entities(forConfigurationName name: Configuration.Name?) -> [NSEntityDescription]? {
+        return entities(forConfigurationName: name?.rawValue)
+    }
+    
+    private func setEntities(_ entities: [NSEntityDescription], forConfigurationName name: Configuration.Name) {
+        setEntities(entities, forConfigurationName: name.rawValue)
     }
     
     public func entity<ManagedType>(for type: ManagedType.Type, in configuration: Configuration? = nil) -> NSEntityDescription? where ManagedType : NSManagedObject {

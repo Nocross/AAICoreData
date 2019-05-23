@@ -17,6 +17,16 @@
 import CoreData
 
 extension NSManagedObject {
+    
+    @available(iOS 10.0, *)
+    open class func fetchIDRequest() -> NSFetchRequest<NSManagedObjectID> {
+        let request = fetchRequest()
+        request.resultType = .managedObjectIDResultType
+        
+        let type = NSFetchRequest<NSManagedObjectID>.self
+        return unsafeDowncast(request, to: type)
+    }
+    
     public convenience init(withProperties properties: [String : Any], context moc: NSManagedObjectContext) {
         if #available(iOS 10.0, *) {
             self.init(context: moc)

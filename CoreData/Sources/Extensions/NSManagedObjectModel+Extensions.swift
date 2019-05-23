@@ -69,6 +69,23 @@ extension NSManagedObjectModel {
 
         return result
     }
+    
+    public func rootEntity(in configuration: Configuration? = nil) -> NSEntityDescription? {
+        var result: NSEntityDescription?
+        
+        if let entities = self.entities(for:configuration) {
+            let roots = entities.filter { $0.userInfo?["Root"] as? Bool == true }
+            
+            if roots.count == 1 {
+                result = roots.first
+            } else if !roots.isEmpty {
+                preconditionFailure("Multiple root entities for configuration - \(String(describing: configuration))")
+                
+            }
+        }
+        
+        return result
+    }
 
     public func entity(ForClass cls: AnyClass, forConfigurationName configuration: String? = nil) -> NSEntityDescription? {
         var result: NSEntityDescription? = nil

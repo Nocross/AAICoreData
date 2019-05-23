@@ -87,12 +87,20 @@ extension NSManagedObjectContext {
 
     //MARK: - Root
 
-    public func rootObject() throws -> NSManagedObject {
+    public func rootObject<T>() throws -> T where T : NSManagedObject {
         self.concurrencyGuard()
 
-        let objectID = try self.rootObjectID()
+        let objectID = try rootObjectID()
 
-        return try self.existingObject(with: objectID)
+        return object(for: objectID)
+    }
+    
+    public func existingRootObject<T>() throws -> T where T : NSManagedObject {
+        self.concurrencyGuard()
+        
+        let objectID = try rootObjectID()
+        
+        return try existingObject(for: objectID)
     }
 
     public func rootObjectID() throws -> NSManagedObjectID {
