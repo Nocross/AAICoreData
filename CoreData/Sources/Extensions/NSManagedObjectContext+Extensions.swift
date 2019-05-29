@@ -15,6 +15,7 @@
  */
 
 import CoreData
+import AAIFoundation
 
 extension NSManagedObjectContext {
     
@@ -84,11 +85,45 @@ extension NSManagedObjectContext {
         
         return object
     }
+    
+    //MARK: -
+    
+    @available(iOS 5.0, *)
+    public func evaluateAndWait<Result>(_ body: @escaping () -> Result) -> Result {
+        var result: Result!
+        
+        let concurrencyType = self.concurrencyType
+        let isMainQueue: Bool
+        if #available(iOS 9.0, *) {
+            let isRelevant = concurrencyType == .mainQueueConcurrencyType
+            isMainQueue = isRelevant && Thread.isMainThread
+        } else {
+            let isRelevant = concurrencyType == .mainQueueConcurrencyType || concurrencyType == .confinementConcurrencyType
+            isMainQueue = isRelevant && Thread.isMainThread
+        }
+        
+        if isMainQueue {
+            result = body()
+        } else {
+            var outcome: Outcome<Result, Error> = nil
+            
+            let block = {
+                let value = body()
+                
+                outcome = .conclusion(value)
+            }
+            performAndWait(block)
+            
+            result = try! outcome.get()
+        }
+        
+        return result
+    }
 
     //MARK: - Root
 
     public func rootObject<T>() throws -> T where T : NSManagedObject {
-        self.concurrencyGuard()
+        concurrencyGuard()
 
         let objectID = try rootObjectID()
 
@@ -96,7 +131,7 @@ extension NSManagedObjectContext {
     }
     
     public func existingRootObject<T>() throws -> T where T : NSManagedObject {
-        self.concurrencyGuard()
+        concurrencyGuard()
         
         let objectID = try rootObjectID()
         
@@ -104,7 +139,7 @@ extension NSManagedObjectContext {
     }
 
     public func rootObjectID() throws -> NSManagedObjectID {
-        self.concurrencyGuard()
+        concurrencyGuard()
 
         var result: NSManagedObjectID? = nil;
 

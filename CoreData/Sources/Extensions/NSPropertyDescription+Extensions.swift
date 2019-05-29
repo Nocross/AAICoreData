@@ -17,5 +17,36 @@
 import CoreData
 
 extension NSPropertyDescription {
+    open var localizedName: String? {
+        var result: String?
+        
+        if let some = entity.managedObjectModel.localizationDictionary {
+            let keys = modelLocalizationDictionaryKeys
+            
+            for key in keys {
+                if let value = some[key] {
+                    result = value
+                    break
+                }
+            }
+        }
+        
+        return result
+    }
     
+    open var modelLocalizationDictionaryKeys: [String] {
+        let global = "Property/\(self.name)"
+        
+        var result = Array<String>()
+        result.reserveCapacity(2)
+        
+        if let suffix = entity.modelLocalizationDictionaryKey {
+            let entitySpecific = "\(global)/\(suffix)"
+            
+            result.append(entitySpecific)
+        }
+        result.append(global)
+        
+        return result
+    }
 }

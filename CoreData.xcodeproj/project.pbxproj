@@ -17,6 +17,8 @@
 		0CE0A4651D17341700F83C68 /* NSPersistentStore+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE0A4641D17341700F83C68 /* NSPersistentStore+Extensions.swift */; };
 		0CF8DC801D1FF9B90068A152 /* NSManagedObject+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF8DC7F1D1FF9B90068A152 /* NSManagedObject+Extensions.swift */; };
 		E13896E8A36979600ED19613 /* Version.c in Sources */ = {isa = PBXBuildFile; fileRef = E138906A2CF36FE62269C613 /* Version.c */; };
+		E314014A2299E11F00D6F1B1 /* NSAttributeDescription+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31401492299E11F00D6F1B1 /* NSAttributeDescription+Extensions.swift */; };
+		E314014C2299E97600D6F1B1 /* NSRelationshipDescription+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E314014B2299E97600D6F1B1 /* NSRelationshipDescription+Extensions.swift */; };
 		E3F6A99A22846D760097C245 /* NSManagedObjectModel+FetchRequestTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F6A99922846D760097C245 /* NSManagedObjectModel+FetchRequestTemplate.swift */; };
 		E3F6A99C22846E570097C245 /* NSManagedObjectModel+Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F6A99B22846E570097C245 /* NSManagedObjectModel+Configuration.swift */; };
 		E3F6A99E2284744E0097C245 /* NSPropertyDescription+Name.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F6A99D2284744E0097C245 /* NSPropertyDescription+Name.swift */; };
@@ -134,6 +136,8 @@
 		E13895A3CEE5CA508A9A8E5C /* CoreData-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CoreData-Bridging-Header.h"; sourceTree = "<group>"; };
 		E138964FB59CA0D071FB12BC /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		E1389F13A8931EE8CC6D7DDB /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		E31401492299E11F00D6F1B1 /* NSAttributeDescription+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributeDescription+Extensions.swift"; sourceTree = "<group>"; };
+		E314014B2299E97600D6F1B1 /* NSRelationshipDescription+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSRelationshipDescription+Extensions.swift"; sourceTree = "<group>"; };
 		E3F6A99922846D760097C245 /* NSManagedObjectModel+FetchRequestTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectModel+FetchRequestTemplate.swift"; sourceTree = "<group>"; };
 		E3F6A99B22846E570097C245 /* NSManagedObjectModel+Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectModel+Configuration.swift"; sourceTree = "<group>"; };
 		E3F6A99D2284744E0097C245 /* NSPropertyDescription+Name.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSPropertyDescription+Name.swift"; sourceTree = "<group>"; };
@@ -628,6 +632,8 @@
 				E3F6A9A522847D0F0097C245 /* NSEntityDescription+Extensions.swift */,
 				E3F6A9A322847CE20097C245 /* NSEntityDescription+Name.swift */,
 				E3F6A9A1228474B70097C245 /* NSFetchedPropertyDescription+Extensions.swift */,
+				E31401492299E11F00D6F1B1 /* NSAttributeDescription+Extensions.swift */,
+				E314014B2299E97600D6F1B1 /* NSRelationshipDescription+Extensions.swift */,
 				E3F6A99F2284745C0097C245 /* NSPropertyDescription+Extensions.swift */,
 				E3F6A99D2284744E0097C245 /* NSPropertyDescription+Name.swift */,
 				E3F6A9A72284850C0097C245 /* NSFetchRequest+Extensions.swift */,
@@ -761,6 +767,7 @@
 				0CE0A4631D17337D00F83C68 /* NSPersistentStoreCoordinator+Extensions.swift in Sources */,
 				0CE0A4601D172BBD00F83C68 /* NSManagedObjectContext+Extensions.swift in Sources */,
 				E3F6A99A22846D760097C245 /* NSManagedObjectModel+FetchRequestTemplate.swift in Sources */,
+				E314014C2299E97600D6F1B1 /* NSRelationshipDescription+Extensions.swift in Sources */,
 				E3F6A9AA2284851C0097C245 /* NSFetchRequest+Template.swift in Sources */,
 				E3F6A9A422847CE20097C245 /* NSEntityDescription+Name.swift in Sources */,
 				0CE0A4651D17341700F83C68 /* NSPersistentStore+Extensions.swift in Sources */,
@@ -771,6 +778,7 @@
 				E3F6A99E2284744E0097C245 /* NSPropertyDescription+Name.swift in Sources */,
 				E3F6A9A2228474B70097C245 /* NSFetchedPropertyDescription+Extensions.swift in Sources */,
 				E3F6A99C22846E570097C245 /* NSManagedObjectModel+Configuration.swift in Sources */,
+				E314014A2299E11F00D6F1B1 /* NSAttributeDescription+Extensions.swift in Sources */,
 				0CF8DC801D1FF9B90068A152 /* NSManagedObject+Extensions.swift in Sources */,
 				E13896E8A36979600ED19613 /* Version.c in Sources */,
 				E3F6A9A82284850C0097C245 /* NSFetchRequest+Extensions.swift in Sources */,

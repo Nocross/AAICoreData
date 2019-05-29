@@ -17,6 +17,42 @@
 import CoreData
 import AAIFoundation
 
+import ObjectiveC.runtime
+
+extension NSEntityDescription {
+    open var managedObjectClass: AnyClass! {
+        var result: AnyClass!
+        
+        if let className = managedObjectClassName {
+           result = className.withCString { objc_getClass($0) as? AnyClass }
+        }
+        
+        return result
+    }
+    
+    open var localizedName: String? {
+        var result: String?
+        
+        if let key = modelLocalizationDictionaryKey, let some = managedObjectModel.localizationDictionary {
+            result = some[key]
+        }
+        
+        return result
+    }
+    
+    open var modelLocalizationDictionaryKey: String? {
+        var result: String?
+        
+        if let name = self.name {
+            result = "Entity/\(name)"
+        }
+        
+        return result
+    }
+}
+
+//MARK: -
+
 extension NSEntityDescription {
     open var propertiesByNameValue: [NSPropertyDescription.Name : NSPropertyDescription] {
         
