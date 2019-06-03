@@ -22,6 +22,7 @@ public extension CoreData {
     public final class Version {
         private init() {}
 
+#if DEBUG
         public static var number: Double {
             return getFoundationVersionNumber()
         }
@@ -29,5 +30,6 @@ public extension CoreData {
         public static var string: String {
             return String(cString: getFoundationVersionString())
         }
+#endif /* DEBUG */
     }
 }
