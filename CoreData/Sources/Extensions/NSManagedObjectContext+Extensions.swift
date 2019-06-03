@@ -22,7 +22,9 @@ extension NSManagedObjectContext {
     @available(iOS 10.0, *)
     public convenience init(parent: NSManagedObjectContext, concurrencyType ct: NSManagedObjectContextConcurrencyType? = nil) {
         let concurrencyType = ct ?? parent.concurrencyType
+        
         self.init(concurrencyType: concurrencyType)
+        
         self.parent = parent
         self.automaticallyMergesChangesFromParent = true
     }
@@ -44,6 +46,8 @@ extension NSManagedObjectContext {
         
         precondition(self.persistentStoreCoordinator != nil)
     }
+    
+    //MARK: -
     
     //MARK: -
     
@@ -200,7 +204,7 @@ extension NSManagedObjectContext {
             self.performAndWait(block)
 
         case .mainQueueConcurrencyType:
-            self.perform(block)
+            block()
         @unknown default:
             let typeName = String(describing: NSManagedObjectContextConcurrencyType.self)
             preconditionFailure("Uknown value for \(typeName) - \(self.concurrencyType)")

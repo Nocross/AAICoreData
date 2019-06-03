@@ -13,7 +13,16 @@ extension NSRelationshipDescription {
         case single(destination: NSManagedObject)
         case multiple(kind: MultiplicityKind)
         
-        
+        public func getSingle<ManagedType>() throws -> ManagedType where ManagedType : NSManagedObject {
+            switch self {
+            case .single(let destination):
+                guard let object = destination as? ManagedType else { preconditionFailure("Type mismatch") }
+                
+                return object
+            default:
+                preconditionFailure()
+            }
+        }
     }
     
     public enum MultiplicityKind {

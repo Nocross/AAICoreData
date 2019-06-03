@@ -98,4 +98,33 @@ extension NSManagedObject {
     public func didAccessValue(forProperty name: NSPropertyDescription.Name?) {
         self.didAccessValue(forKey: name?.rawValue)
     }
+    
+    open func validate(value io: inout String, forKeyPath inKeyPath: String) throws {
+        var value = io as NSString
+        let pointer = AutoreleasingUnsafeMutablePointer<AnyObject?>(&value)
+        
+        try validateValue(pointer, forKey: inKeyPath)
+        
+        io = value as String
+    }
+    
+    open func validate<T: ReferenceConvertible>(value io: inout T, for property: NSPropertyDescription) throws {
+        let isSane = entity.properties.contains(property)
+        guard isSane else { preconditionFailure() }
+        
+        try validate(value: &io, forKeyPath: property.name)
+    }
+    
+    open func validate<T: ReferenceConvertible>(value io: inout T, for propertyName: NSPropertyDescription.Name) throws {
+        let isSane = entity.attributesByNameValue.keys.contains(propertyName)
+        guard isSane else { preconditionFailure() }
+        
+        try validate(value: &io, forKeyPath: propertyName.rawValue)
+    }
+    
+    open func validate<T: ReferenceConvertible>(value io: inout T, forKeyPath inKeyPath: String) throws {
+        let pointer = AutoreleasingUnsafeMutablePointer<AnyObject?>(&io)
+        
+        try validateValue(pointer, forKey: inKeyPath)
+    }
 }

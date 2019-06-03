@@ -16,14 +16,18 @@
 
 import CoreData
 
+public protocol AttributeTypeValueProtocol {
+    var attributeType: NSAttributeType { get }
+}
+
 extension NSAttributeDescription {
-    public var defaultTypedValue: `AttributeType`? {
-        return `AttributeType`(attribute: attributeType, value: defaultValue)
+    public var defaultTypedValue: AttributeType? {
+        return AttributeType(attribute: attributeType, value: defaultValue)
     }
 }
 
 extension NSAttributeDescription {
-    public enum `AttributeType` {
+    public enum AttributeType {
         case undefinedAttributeType
         
         case integer16AttributeType(short: Int16)
@@ -113,18 +117,18 @@ extension NSAttributeDescription {
             }
         }
         
-        public static func make(from attributeType: NSAttributeType, value: Any?) -> `AttributeType`? {
+        public static func make(from attributeType: NSAttributeType, value: Any?) -> AttributeType? {
             return `AttributeType`(attribute: attributeType, value: value)
         }
         
-        public static func make(from attributeDescription: NSAttributeDescription, value: Any?) -> `AttributeType`? {
+        public static func make(from attributeDescription: NSAttributeDescription, value: Any?) -> AttributeType? {
             let type = attributeDescription.attributeType
-            return `AttributeType`(attribute: type, value: value)
+            return AttributeType(attribute: type, value: value)
         }
     }
 }
 
-extension NSAttributeDescription.`AttributeType`: RawRepresentable {
+extension NSAttributeDescription.AttributeType: RawRepresentable {
     public typealias RawValue = NSAttributeType
     
     public init?(rawValue: RawValue) {
