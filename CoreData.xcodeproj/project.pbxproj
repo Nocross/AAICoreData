@@ -19,6 +19,7 @@
 		E13896E8A36979600ED19613 /* Version.c in Sources */ = {isa = PBXBuildFile; fileRef = E138906A2CF36FE62269C613 /* Version.c */; };
 		E314014A2299E11F00D6F1B1 /* NSAttributeDescription+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31401492299E11F00D6F1B1 /* NSAttributeDescription+Extensions.swift */; };
 		E314014C2299E97600D6F1B1 /* NSRelationshipDescription+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E314014B2299E97600D6F1B1 /* NSRelationshipDescription+Extensions.swift */; };
+		E338F1BB22A93C4800A462E1 /* ManagedCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E338F1BA22A93C4800A462E1 /* ManagedCodable.swift */; };
 		E3F6A99A22846D760097C245 /* NSManagedObjectModel+FetchRequestTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F6A99922846D760097C245 /* NSManagedObjectModel+FetchRequestTemplate.swift */; };
 		E3F6A99C22846E570097C245 /* NSManagedObjectModel+Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F6A99B22846E570097C245 /* NSManagedObjectModel+Configuration.swift */; };
 		E3F6A99E2284744E0097C245 /* NSPropertyDescription+Name.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F6A99D2284744E0097C245 /* NSPropertyDescription+Name.swift */; };
@@ -138,6 +139,7 @@
 		E1389F13A8931EE8CC6D7DDB /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		E31401492299E11F00D6F1B1 /* NSAttributeDescription+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributeDescription+Extensions.swift"; sourceTree = "<group>"; };
 		E314014B2299E97600D6F1B1 /* NSRelationshipDescription+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSRelationshipDescription+Extensions.swift"; sourceTree = "<group>"; };
+		E338F1BA22A93C4800A462E1 /* ManagedCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedCodable.swift; sourceTree = "<group>"; };
 		E3F6A99922846D760097C245 /* NSManagedObjectModel+FetchRequestTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectModel+FetchRequestTemplate.swift"; sourceTree = "<group>"; };
 		E3F6A99B22846E570097C245 /* NSManagedObjectModel+Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectModel+Configuration.swift"; sourceTree = "<group>"; };
 		E3F6A99D2284744E0097C245 /* NSPropertyDescription+Name.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSPropertyDescription+Name.swift"; sourceTree = "<group>"; };
@@ -595,6 +597,7 @@
 			children = (
 				0CA939851E8AFE740092CA46 /* CoreData.swift */,
 				0CE0A4581D172B5D00F83C68 /* Extensions */,
+				E338F1B922A93C2A00A462E1 /* Protocols */,
 				E1389CC04B3F507EBD952B14 /* Version */,
 			);
 			path = Sources;
@@ -648,6 +651,14 @@
 				E138906A2CF36FE62269C613 /* Version.c */,
 			);
 			path = Version;
+			sourceTree = "<group>";
+		};
+		E338F1B922A93C2A00A462E1 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				E338F1BA22A93C4800A462E1 /* ManagedCodable.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -779,6 +790,7 @@
 				E3F6A9A2228474B70097C245 /* NSFetchedPropertyDescription+Extensions.swift in Sources */,
 				E3F6A99C22846E570097C245 /* NSManagedObjectModel+Configuration.swift in Sources */,
 				E314014A2299E11F00D6F1B1 /* NSAttributeDescription+Extensions.swift in Sources */,
+				E338F1BB22A93C4800A462E1 /* ManagedCodable.swift in Sources */,
 				0CF8DC801D1FF9B90068A152 /* NSManagedObject+Extensions.swift in Sources */,
 				E13896E8A36979600ED19613 /* Version.c in Sources */,
 				E3F6A9A82284850C0097C245 /* NSFetchRequest+Extensions.swift in Sources */,
