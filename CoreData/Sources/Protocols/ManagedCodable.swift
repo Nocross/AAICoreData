@@ -20,21 +20,35 @@ public typealias ManagedCodable = ManagedDecodable & ManagedEncodable
 
 //MARK: -
 
-public typealias ManagedCodingKey = CodingKey & CaseIterable
+//public typealias ManagedCodingKey = CodingKey & CaseIterable
+
+public protocol ManagedCodingKey: CodingKey {
+    associatedtype AllCodingKeys : Collection where Self == Self.AllCodingKeys.Element
+    
+    static var allCodingKeys: AllCodingKeys { get }
+}
+
+public protocol CaseIterableManagedCodingKey: ManagedCodingKey, CaseIterable where Self.AllCodingKeys == Self.AllCases {
+}
+
+extension CaseIterableManagedCodingKey {
+    public static var allCodingKeys: AllCodingKeys {
+        return allCases
+    }
+}
 
 //MARK: - ManagedEncodable
 
-public protocol ManagedEncodable: Encodable where Self : NSManagedObject {
-    associatedtype CodingKeyType: ManagedCodingKey
+public protocol ManagedEncodable: Encodable, ManagedCoding {
     
     func getAttribute(for codingKey: CodingKeyType) -> NSAttributeDescription?
 }
 
-extension ManagedEncodable {
+public extension ManagedEncodable {
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeyType.self)
         
-        for key in CodingKeyType.allCases {
+        for key in CodingKeyType.allCodingKeys {
             if let attribute = getAttribute(for: key) {
                 if let value = value(forKey: attribute.name), let type = NSAttributeDescription.AttributeType.make(from: attribute, value: value) {
                     try container.encode(type, forKey: key)
@@ -43,12 +57,6 @@ extension ManagedEncodable {
                 }
             }
         }
-    }
-}
-
-extension ManagedEncodable where CodingKeyType: RawRepresentable, CodingKeyType.RawValue == String {
-    func getAttribute(for codingKey: CodingKeyType) -> NSAttributeDescription? {
-        return entity.attributesByName[codingKey.rawValue]
     }
 }
 
@@ -108,10 +116,7 @@ extension KeyedEncodingContainerProtocol {
 
 //MARK: - ManagedDecodable
 
-public protocol ManagedDecodable: Decodable where Self : NSManagedObject {
-    associatedtype CodingKeyType: ManagedCodingKey
-    
-    func getAttribute(for codingKey: CodingKeyType) -> NSAttributeDescription?
+public protocol ManagedDecodable: Decodable, ManagedCoding {
     
     static func getEntity(for decoder: Decoder) -> NSEntityDescription
 }
@@ -124,7 +129,7 @@ extension ManagedDecodable {
         
         self.init(entity: entity, insertInto: nil)
         
-        for key in CodingKeyType.allCases {
+        for key in CodingKeyType.allCodingKeys {
             if let attribute = getAttribute(for: key) {
                 let value = try container.decode(attribute.attributeType, forKey: key)
                 
@@ -215,6 +220,20 @@ extension KeyedDecodingContainerProtocol {
         }
         
         return result
+    }
+}
+
+//MARK: -
+
+public protocol ManagedCoding where Self : NSManagedObject {
+    associatedtype CodingKeyType: ManagedCodingKey
+    
+    func getAttribute(for codingKey: CodingKeyType) -> NSAttributeDescription?
+}
+
+public extension ManagedCoding where CodingKeyType: RawRepresentable, CodingKeyType.RawValue == String {
+    func getAttribute(for codingKey: CodingKeyType) -> NSAttributeDescription? {
+        return entity.attributesByName[codingKey.rawValue]
     }
 }
 
