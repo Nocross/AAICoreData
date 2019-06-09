@@ -27,6 +27,15 @@ extension NSManagedObject {
         return unsafeDowncast(request, to: type)
     }
     
+    @available(iOS 10.0, *)
+    open class func fetchDictionaryRequest() -> NSFetchRequest<NSDictionary> {
+        let request = fetchRequest()
+        request.resultType = .dictionaryResultType
+        
+        let type = NSFetchRequest<NSDictionary>.self
+        return unsafeDowncast(request, to: type)
+    }
+    
     public convenience init(withProperties properties: [String : Any], context moc: NSManagedObjectContext) {
         if #available(iOS 10.0, *) {
             self.init(context: moc)
