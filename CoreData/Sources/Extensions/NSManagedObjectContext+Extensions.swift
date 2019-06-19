@@ -183,15 +183,14 @@ extension NSManagedObjectContext {
 
     @available(iOS 5.0, *)
     public func recursiveSave() throws {
-        guard self.hasChanges && self.persistentStoreCoordinator != nil else {
-            return
-        }
 
         var saveError: Error! = nil
 
         let block = {
             do {
-                try self.save()
+				if self.hasChanges && self.persistentStoreCoordinator != nil {
+					try self.save()
+				}
             } catch {
                 saveError = error
             }
@@ -201,10 +200,10 @@ extension NSManagedObjectContext {
         case .confinementConcurrencyType:
             fallthrough
         case .privateQueueConcurrencyType:
-            self.performAndWait(block)
+            performAndWait(block)
 
         case .mainQueueConcurrencyType:
-            block()
+            perform(block)
         @unknown default:
             let typeName = String(describing: NSManagedObjectContextConcurrencyType.self)
             preconditionFailure("Uknown value for \(typeName) - \(self.concurrencyType)")
