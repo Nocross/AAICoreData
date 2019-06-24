@@ -201,14 +201,15 @@ extension NSManagedObjectContext {
         switch self.concurrencyType {
         case .confinementConcurrencyType:
             fallthrough
+            
         case .privateQueueConcurrencyType:
             performAndWait(block)
-
+            
         case .mainQueueConcurrencyType:
-            perform(block)
+            Thread.isMainThread ? block() : performAndWait(block)
+            
         @unknown default:
-            let typeName = String(describing: NSManagedObjectContextConcurrencyType.self)
-            preconditionFailure("Uknown value for \(typeName) - \(self.concurrencyType)")
+            fatalUnknownValueError(self.concurrencyType)
         }
 
         if let error = saveError {
