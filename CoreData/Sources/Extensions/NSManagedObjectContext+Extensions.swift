@@ -79,7 +79,9 @@ extension NSManagedObjectContext {
     @available(iOS 3.0, *)
     public func existingObject<ManagedType>(for objectID: NSManagedObjectID) throws -> ManagedType where ManagedType : NSManagedObject {
         
-        guard let object = try existingObject(with: objectID) as? ManagedType else {
+        let object = try existingObject(with: objectID)
+        
+        guard let result = object as? ManagedType else {
             let type = Swift.type(of: self.object(with: objectID))
             let typeName = String(describing: type)
             let entityTypeName = String(describing: objectID.entity.managedObjectClassName)
@@ -87,7 +89,7 @@ extension NSManagedObjectContext {
             preconditionFailure(message)
         }
         
-        return object
+        return result
     }
     
     //MARK: -
