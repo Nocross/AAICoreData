@@ -231,3 +231,29 @@ extension NSManagedObjectContext {
         }
     }
 }
+
+//MARK: -
+
+extension NSManagedObjectContextConcurrencyType: CustomReflectable {
+    public var customMirror: Mirror {
+        let result: Mirror
+        
+        var value: String
+        
+        switch self {
+        case .confinementConcurrencyType:
+            value = "confinementConcurrencyType"
+        case .mainQueueConcurrencyType:
+            value = "mainQueueConcurrencyType"
+        case .privateQueueConcurrencyType:
+            value = "privateQueueConcurrencyType"
+        @unknown default:
+            value = "uknown (raw) value - \(self.rawValue)"
+        }
+        
+        result = Mirror(self, unlabeledChildren: [value])
+        
+        return result
+    }
+
+}
