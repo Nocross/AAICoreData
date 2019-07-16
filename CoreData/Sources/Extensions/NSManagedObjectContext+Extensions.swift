@@ -128,9 +128,19 @@ extension NSManagedObjectContext {
     
     @available(iOS 5.0, *)
     public func evaluateAndWait<ManagedObject, Result>(for objectID: NSManagedObjectID, body: @escaping (ManagedObject) -> Result) throws -> Result where ManagedObject : NSManagedObject {
-        let object = try existingObject(for: objectID) as ManagedObject
+        var thrownError: Error?
+        var object: ManagedObject?
+        performAndWait {
+            do {
+                object = try existingObject(for: objectID) as ManagedObject
+            } catch {
+                thrownError = error
+            }
+        }
+        if let error = thrownError { throw error }
+        
         let result = evaluateAndWait { () -> Result in
-            return body(object)
+            return body(object!)
         }
         
         return result
